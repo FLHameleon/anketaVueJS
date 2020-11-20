@@ -1,27 +1,32 @@
 <template>
   <div>
 
-    <label>{{ namePole }}:
-    <input type="range" min="10000" max="50000" step="1000" value="25000"/></label>
-    <label>{{startZnah}}</label>
+  <label>{{ dannieSalary.zagolovokSalary }}:</label>
+
+
+<input type="range" :min="dannieSalary.minMoney" :max="dannieSalary.maxMoney" :step="dannieSalary.lengthStep" v-model="value"> 
+<!-- <input type="number" v-model="value"/> -->
+ 
+<span v-text="total"></span>
 
   </div>
 </template>
 
 <script>
-//Доделать
 // Если проверка истина то отправить message на главн форму
+
 export default {
   props: [
-    'namePole'
+    'dannieSalary'
   ],
   data() {
     return {
-      message: '',
-      minMoney: 10000,
-      maxMoney: 50000,
-      startZnah: 25000,
-      lengthStep: 1000
+    value: this.dannieSalary.startZnah
+    }
+  },
+  computed: {
+      total: function () {
+      return this.value
     }
   }
 }
