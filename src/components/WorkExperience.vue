@@ -1,24 +1,41 @@
 <template>
   <div>
 
-    <label>{{ namePole }}:</label>
+    <label v-bind:class="{done: (onSubmit())}">{{ startData.zagolovok }}:</label>
 
-    <input type="checkBox">
+    <input type="checkBox" v-model="isEx">
 
   </div>
 </template>
 
 <script>
+// Доделать взятие результата с кнопки
 // Если проверка истина то отправить message на главн форму
 export default {
   props: [
-    'namePole'
+    'startData'
   ],
   data() {
     return {
-      message: ''
+      isEx: '123',
+      rezult: {
+        idName: ('' + this.startData.idName),
+        message: false
+      }
+    }
+  },
+  methods: {
+    onSubmit() {
+      // console.log(this.isEx)
+      var otpr = Object.assign({}, this.rezult);
+      
+      this.$emit('rezault', otpr)
+      
+      return false
     }
   }
+
+
 }
 </script>
 

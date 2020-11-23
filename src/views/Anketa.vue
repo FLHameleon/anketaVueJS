@@ -2,27 +2,23 @@
   <div>
     <form class="textPoleRu">
 
-    <FIO :namePole="poleName" @rezault="addTodo1"/>
-    <FIO :namePole="poleSurname" @rezault="addTodo2"/>
-    <FIO :namePole="poleMiddleName" @rezault="addTodo3"/>
-    <Pol :namePole="polePol" @rezault="addTodo4"/>
-    <Phone :namePole="polePhone" @rezault="addTodo5"/>
-    <DateOfBirth :namePole="poleDateOfBirth"/>
-    <Education :namePole="poleEducation"/>
-    <WorkExperience :namePole="poleWorkExperience"/>
-    <Salary :dannieSalary="dannieSalary"/>
-    <Email :namePole="poleEmail"/>
-    <Password :dataPassword="dataPassword"/>
+    <FIO :startData="dannieName" @rezault="rezultAnket"/>
+    <FIO :startData="dannieSurname" @rezault="rezultAnket"/>
+    <FIO :startData="dannieMiddleName" @rezault="rezultAnket"/>
+    <Pol :startData="danniePol" @rezault="rezultAnket"/>
+    <Phone :startData="danniePhone" @rezault="rezultAnket"/>
+    <DateOfBirth :startData="dannieDateOfBirth" @rezault="rezultAnket"/>
+    <Education :startData="dannieEducation" @rezault="rezultAnket"/>
+    <WorkExperience :startData="dannieWorkExperience" @rezault="rezultAnket"/>
+    <Salary :startData="dannieSalary" @rezault="rezultAnket"/>
+    <Email :startData="dannieEmail" @rezault="rezultAnket"/>
+    <Password :startData="danniePassword" @rezault="rezultAnket"/>
 
-    <button @click.prevent="rezultAnker">Отправить</button>
+    <button @click.prevent="messAnket">Отправить</button>
 
     <router-link to="/">Назад</router-link>
     <hr>
 
-    <p>{{vihodnDannie.messegeName}}</p>
-
-    <p>{{typeof(vihodnDannie.messegeName)}}</p>
- 
     </form>
    
   </div>
@@ -44,62 +40,76 @@ export default {
   name: 'app',
   data() {
     return {
-      vihodnDannie: {
-        messegeName: '',
-        messegeSurname: '',
-        messegeMiddleName: '',
-        messegePol: '',
-        messegePhone: '',
-
-        messegeDateOfBirth: '',
-        messegeEducation: '',
-        messegeWorkExperience: '',
-        messegeSalary: '',
-        messegeEmail: '',
-        messegePassword: ''
+      sborkaUser : {},
+      dannieName: {
+        idName: 'dannieName',
+        zagolovok: 'Имя'
+      },
+      dannieSurname: {
+        idName: 'dannieSurname',
+        zagolovok: 'Фамилия'
+      },
+      dannieMiddleName: {
+        idName: 'dannieMiddleName',
+        zagolovok: 'Отчество'
       },
 
+      danniePol: {
+        idName: 'danniePol',
+        zagolovok: 'Пол'
+      },
 
-      poleName: 'Имя',
-      poleSurname: 'Фамилия',
-      poleMiddleName: 'Отчество',
-      polePol: 'Пол',
-      polePhone: 'Телефон',
-      poleDateOfBirth: 'Дата рождения',
-      poleEducation: 'Образование',
-      poleWorkExperience: 'Имеется ли опыт работы',
+      danniePhone: {
+        idName: 'danniePhone',
+        zagolovok: 'Телефон'
+      },
+
+      dannieDateOfBirth: {
+        idName: 'dannieDateOfBirth',
+        zagolovok: 'Дата рождения'
+      },
+
+      dannieEducation: {
+        idName: 'dannieEducation',
+        zagolovok: 'Образование'
+      },
+
+      dannieWorkExperience: {
+        idName: 'dannieWorkExperience',
+        zagolovok: 'Имеется ли опыт работы'
+      },
+
       dannieSalary: {
-        zagolovokSalary: 'Заработная плата',
+        idName: 'dannieSalary',
+        zagolovok: 'Заработная плата',
         startZnah: 20500,
         minMoney: 10000,
         maxMoney: 50000,
         lengthStep: 1000
       },
-      poleEmail: 'Электронная почта',
-      dataPassword: {
-        zagolovokPoly1:'Пароль', 
-        zagolovokPoly2:'Введите пароль'
+
+      dannieEmail: {
+        idName: 'dannieEmail',
+        zagolovok: 'Электронная почта'
+      },
+
+      danniePassword: {
+        idName: 'danniePassword',
+        zagolovok: {
+          zagolovokPoly1:'Пароль', 
+          zagolovokPoly2:'Введите пароль'
         }
+      }
     }
   },
   methods: {
-    addTodo1(todo) {
-      this.vihodnDannie.messegeName = todo
+    rezultAnket(todo) {
+    
+      this.sborkaUser[todo.idName] = todo.message
+  
     },
-    addTodo2(todo) {
-      this.vihodnDannie.messegeSurname = todo
-    },
-    addTodo3(todo) {
-      this.vihodnDannie.messegeMiddleName = todo
-    },
-    addTodo4(todo) {
-      this.vihodnDannie.messegePol = todo
-    },
-    addTodo5(todo) {
-      this.vihodnDannie.messegePhone = todo
-    },
-    rezultAnker() {
-      console.log(this.vihodnDannie)
+    messAnket() {
+      console.log(this.sborkaUser)      
     }
   },
   components: {

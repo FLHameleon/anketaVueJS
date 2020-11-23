@@ -1,36 +1,59 @@
 <template>
   <div>
 
-    <label  v-bind:class="{done: (/^([А-Я]|[а-я]|[A-Z]|[a-z]|[0-9]){5,}$/.test(message))}">{{ namePole }}:</label>
+    <label  v-bind:class="{done: (onSubmit() && (/^([А-Я]|[а-я]|[A-Z]|[a-z]|[0-9]){5,}$/.test(rezult.message)))}">{{ startData.zagolovok }}:</label>
 
-    <input type="text" v-model="message">
+    <input type="text" v-model="rezult.message">
 
-    <select>
-        <option v-for="vidMail in vidsMails">{{ vidMail }}</option>
+    <select v-model="okonhan">
+      <option v-for="vidMail in vidsMails">{{ vidMail }}</option>
     </select>
-
 
   </div>
 </template>
 
 <script>
+// Доделать на старте селект пуст
 // Если проверка истина то отправить message на главн форму
 export default {
   props: [
-    'namePole'
+    'startData'
   ],
   data() {
+
+
     return {
-        message: '',
-        vidsMails: [
-            '@mail.ru',
-            '@inbox.ru',
-            '@list.ru',
-            '@bk.ru',
-            '@yandex.ru',
-            '@gmail.com',
-            'Other'
-        ]
+      okonhan: '',
+      rezult: {
+        idName: ('' + this.startData.idName),
+        message: ''
+      },
+      vidsMails: [
+          '@mail.ru',
+          '@inbox.ru',
+          '@list.ru',
+          '@bk.ru',
+          '@yandex.ru',
+          '@gmail.com',
+          'Other'
+      ]
+    }
+  },
+  methods: {
+    onSubmit() {
+      var otpr = Object.assign({}, this.rezult);
+      
+      // if((/^[0-9]{7,10}$/.test(otpr.message))) {
+      //   otpr.message = this.valueCity + otpr.message
+      //   this.$emit('rezault', otpr)
+      // } else { 
+      otpr.message = otpr.message + this.okonhan
+      this.$emit('rezault', otpr)
+      // }
+
+      // console.log(this.valueCity)
+
+      return true
     }
   }
 }

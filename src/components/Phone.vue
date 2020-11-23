@@ -1,32 +1,54 @@
 <template>
   <div>
 
-    <label  v-bind:class="{done: (/^[0-9]{7,10}$/.test(message))}">{{ namePole }}:</label>
+    <label v-bind:class="{done: (onSubmit() && (/^[0-9]{7,10}$/.test(rezult.message)))}">{{ startData.zagolovok }}:</label>
 
-    <select>
+    <select v-model="valueCity">
         <option v-for="kodCity in kodCities">{{ kodCity }}</option>
     </select>
 
-    <input type="text" v-model="message">
+    <input type="text" v-model="rezult.message">
 
   </div>
 </template>
 
 <script>
+// При старте страницы select выбрано пустое поле
 // Если проверка истина то отправить message на главн форму
 export default {
   props: [
-    'namePole'
+    'startData'
   ],
   data() {
     return {
-        message: '',
-        kodCities: [
-            '+38(071)',
-            '+38(066)',
-            '+7(044)',
-            '+7(165)'
-        ]
+      valueCity: '',
+      rezult: {
+        idName: ('' + this.startData.idName),
+        message: ''
+      },
+      kodCities: [
+          '+38(071)',
+          '+38(066)',
+          '+7(044)',
+          '+7(165)'
+      ]
+    }
+  },
+  methods: {
+    onSubmit() {
+      var otpr = Object.assign({}, this.rezult);
+      
+      if((/^[0-9]{7,10}$/.test(otpr.message))) {
+        otpr.message = this.valueCity + otpr.message
+        this.$emit('rezault', otpr)
+      } else { 
+        otpr.message = ''
+        this.$emit('rezault', otpr)
+      }
+
+      // console.log(this.valueCity)
+
+      return true
     }
   }
 }

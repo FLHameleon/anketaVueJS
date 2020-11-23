@@ -1,10 +1,10 @@
 <template>
   <div>
 
-    <label>{{ namePole }}:</label>
+    <label v-bind:class="{done: (onSubmit())}">{{ startData.zagolovok }}:</label>
 
-    <select>
-        <option v-for="vidEducation in vidsEducations">{{ vidEducation }}</option>
+    <select v-model="znahEducation">
+      <option v-for="vidEducation in vidsEducations">{{ vidEducation }}</option>
     </select>
 
   </div>
@@ -14,22 +14,41 @@
 // Если проверка истина то отправить message на главн форму
 export default {
   props: [
-    'namePole'
+    'startData'
   ],
-  
   data() {
     return {
-        message: '',
-        vidsEducations: [
-            'Высшее',
-            'Неполное высшее',
-            'Среднее',
-            'Не полное среднее',
-            'Образование отсутствует',
-            'Другое'
-        ]
+      znahEducation: '',
+      rezult: {
+        idName: ('' + this.startData.idName),
+        message: ''
+      },
+      vidsEducations: [
+        'Высшее',
+        'Неполное высшее',
+        'Среднее',
+        'Не полное среднее',
+        'Образование отсутствует',
+        'Другое'
+      ]
+    }
+  },
+  methods: {
+    onSubmit() {
+      var otpr = Object.assign({}, this.rezult);
+      
+      // if((/^[А-Я][а-я]+$/.test(otpr.message))) {
+      //   this.$emit('rezault', otpr)
+      // } else { 
+      //   otpr.message = ''
+      otpr.message = this.znahEducation
+      this.$emit('rezault', otpr)
+      // }
+
+      return false
     }
   }
+
 }
 
 

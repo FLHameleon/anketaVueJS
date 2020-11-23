@@ -1,9 +1,9 @@
 <template>
   <div>
 
-    <label v-bind:class="{done: (onSubmit() && (/^[А-Я][а-я]+$/.test(message)))}">{{ namePole }}:</label>
+    <label v-bind:class="{done: (onSubmit() && (/^[А-Я][а-я]+$/.test(rezult.message)))}">{{ startData.zagolovok }}:</label>
 
-    <input type="text" v-model="message">
+    <input type="text" v-model="rezult.message">
 
   </div>
 </template>
@@ -13,18 +13,26 @@
 // Если проверка истина то отправить message на главн форму
 export default {
   props: [
-    'namePole'
+    'startData'
   ],
   data() {
     return {
-      message: ''
+      rezult: {
+        idName: ('' + this.startData.idName),
+        message: ''
+      }
     }
   },
   methods: {
     onSubmit() {
-      if((/^[А-Я][а-я]+$/.test(this.message))) {
-        this.$emit('rezault', this.message)
-      } else this.$emit('rezault', false)
+      var otpr = Object.assign({}, this.rezult);
+      
+      if((/^[А-Я][а-я]+$/.test(otpr.message))) {
+        this.$emit('rezault', otpr)
+      } else { 
+        otpr.message = ''
+        this.$emit('rezault', otpr)
+      }
 
       return true
     }
