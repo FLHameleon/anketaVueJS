@@ -1,15 +1,14 @@
 <template>
   <div>
 
-    <label v-bind:class="{done: (onSubmit())}">{{ startData.zagolovok }}:</label>
+    <label v-bind:class="{done: (onSubmit())}">{{ startData.zagolovok }}</label>
 
-    <input type="checkBox" v-model="isEx">
+    <input type="date" value="1988-07-05" min="1950-01-01" max="2020-09-01" v-model="rezult.message" />
 
   </div>
 </template>
 
 <script>
-// Доделать взятие результата с кнопки
 // Если проверка истина то отправить message на главн форму
 export default {
   props: [
@@ -17,16 +16,14 @@ export default {
   ],
   data() {
     return {
-      isEx: '123',
       rezult: {
         idName: ('' + this.startData.idName),
-        message: false
+        message: '2020-08-12'
       }
     }
   },
   methods: {
     onSubmit() {
-      // console.log(this.isEx)
       var otpr = Object.assign({}, this.rezult);
       
       this.$emit('rezault', otpr)
@@ -34,14 +31,14 @@ export default {
       return false
     }
   }
-
-
 }
+
+
 </script>
 
 <style scoped>
   .done {
-    color: #fff;
-    background: green;
+    /* color: #fff;
+    background: green; */
   }
 </style>

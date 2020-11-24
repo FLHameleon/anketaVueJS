@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '/home/iai/workOcen3/19112020/0805/src/views/Home'
-import Anketa from '/home/iai/workOcen3/19112020/0805/src/views/Anketa'
-
+import Home from '/home/iai/workOcen3/24112020/0805/src/views/Home'
+import Receipt from '/home/iai/workOcen3/24112020/0805/src/views/Receipt'
+// workOcen3/24112020/0805/src
 Vue.use(Router)
 
 export default new Router({
@@ -13,8 +13,8 @@ export default new Router({
       component: Home
     },
     {
-      path: '/anketa',
-      component: Anketa
+      path: '/receipt',
+      component: Receipt
     }
   ]
 })

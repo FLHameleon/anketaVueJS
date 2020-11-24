@@ -1,14 +1,15 @@
 <template>
   <div>
 
-    <label  v-bind:class="{done: (onSubmit() && (/^([А-Я]|[а-я]|[A-Z]|[a-z]|[0-9]){5,}$/.test(rezult.message)))}">{{ startData.zagolovok }}:</label>
-
+    <label  v-bind:class="{done: (onSubmit() && (/^([А-Я]|[а-я]|[A-Z]|[a-z]|[0-9]){5,}$/.test(rezult.message)))}">{{ startData.zagolovok }}</label>
+    <p>
     <input type="text" v-model="rezult.message">
 
     <select v-model="okonhan">
+      <!-- <option value="" selected="selected">@mail.ru</option> -->
       <option v-for="vidMail in vidsMails">{{ vidMail }}</option>
     </select>
-
+    </p>
   </div>
 </template>
 
@@ -43,15 +44,8 @@ export default {
     onSubmit() {
       var otpr = Object.assign({}, this.rezult);
       
-      // if((/^[0-9]{7,10}$/.test(otpr.message))) {
-      //   otpr.message = this.valueCity + otpr.message
-      //   this.$emit('rezault', otpr)
-      // } else { 
       otpr.message = otpr.message + this.okonhan
       this.$emit('rezault', otpr)
-      // }
-
-      // console.log(this.valueCity)
 
       return true
     }
@@ -63,7 +57,7 @@ export default {
 
 <style scoped>
   .done {
-    color: #fff;
-    background: green;
+    /* color: #fff;
+    background: green; */
   }
 </style>

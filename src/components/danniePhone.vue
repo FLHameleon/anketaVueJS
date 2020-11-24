@@ -1,14 +1,15 @@
 <template>
   <div>
 
-    <label v-bind:class="{done: (onSubmit() && (/^[0-9]{7,10}$/.test(rezult.message)))}">{{ startData.zagolovok }}:</label>
-
+    <label v-bind:class="{done: (onSubmit() && (/^[0-9]{7,10}$/.test(rezult.message)))}">{{ startData.zagolovok }}</label>
+    <p>
     <select v-model="valueCity">
+      <!-- <option value="" selected>+38(071)</option> -->
         <option v-for="kodCity in kodCities">{{ kodCity }}</option>
     </select>
 
     <input type="text" v-model="rezult.message">
-
+    </p>
   </div>
 </template>
 
@@ -58,7 +59,7 @@ export default {
 
 <style scoped>
   .done {
-    color: #fff;
-    background: green;
+    /* color: #fff;
+    background: green; */
   }
 </style>
